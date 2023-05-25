@@ -10,7 +10,7 @@ export function OurCoffes() {
       <h2>Nossos cafés</h2>
       <div>
         {coffees.map((coffee) => {
-          return <Card key={coffee.id} /* coffee={coffee} */ />
+          return <Card key={coffee.id} coffee={coffee} />
         })}
       </div>
     </CoffeesWrapper>
