@@ -15,9 +15,5 @@ export const CheckoutContainer = styled.div`
     padding-bottom: 0.938rem;
   }
 `
-export const AddressWrapper = styled.div`
-  border: 1px solid red;
-`
-export const CartWrapper = styled.div`
-  border: 1px solid blue;
-`
+export const AddressWrapper = styled.div``
+export const CartWrapper = styled.div``
