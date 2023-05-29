@@ -1,4 +1,5 @@
 import { useCart } from '../../../../hook/useCart'
+import { formatMoney } from '../../../../utils/formatMoney'
 import { CoffeeCard } from '../CoffeeCard'
 import {
   CheckoutCartContainer,
@@ -7,8 +8,15 @@ import {
   FinalBill,
 } from './styles'
 
+const deliveryPrice = 3.5
+
 export function CheckoutCart() {
-  const { cartItems } = useCart()
+  const { cartItems, cartItemsTotal, cartQuantity } = useCart()
+
+  const cartTotal = deliveryPrice + cartItemsTotal
+  const formattedItemsTotal = formatMoney(cartItemsTotal)
+  const formattedCartTotal = formatMoney(cartTotal)
+  const formattedDeliveryPrice = formatMoney(deliveryPrice)
 
   return (
     <CheckoutCartContainer>
@@ -22,20 +30,22 @@ export function CheckoutCart() {
         <FinalBill>
           <CheckoutInfos>
             <p>Total de itens</p>
-            <p>01</p>
+            <p>{formattedItemsTotal}</p>
           </CheckoutInfos>
 
           <CheckoutInfos>
             <p>Entrega</p>
-            <p>R$ 20,20</p>
+            <p>R$ {formattedDeliveryPrice}</p>
           </CheckoutInfos>
 
           <CheckoutInfos>
             <span>Total</span>
-            <span>R$ 20,20</span>
+            <span>R$ {formattedCartTotal}</span>
           </CheckoutInfos>
 
-          <button type="submit">confirmar pedido</button>
+          <button type="submit" disabled={cartQuantity <= 0}>
+            confirmar pedido
+          </button>
         </FinalBill>
       </CheckoutCartContent>
     </CheckoutCartContainer>
