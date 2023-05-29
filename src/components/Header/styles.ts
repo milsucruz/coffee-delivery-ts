@@ -19,7 +19,7 @@ export const HeaderNav = styled.nav`
   align-items: center;
   gap: 0.75rem;
 
-  > button {
+  button {
     display: flex;
     align-items: center;
 

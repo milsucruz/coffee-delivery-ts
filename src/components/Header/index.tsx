@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom'
 import logo from '../../assets/Logo.svg'
 import { HeaderContainer, HeaderNav, LocationBtn, CartBtn } from './styles'
 
@@ -13,10 +14,13 @@ export function Header() {
           <MapPin size={22} weight="fill" />
           <span>Fortaleza - CE</span>
         </LocationBtn>
-        <CartBtn>
-          {/* {cartQuantity >= 1 && <span>{cartQuantity}</span>} */}
-          <ShoppingCart size={22} weight="fill" />
-        </CartBtn>
+
+        <NavLink to="/checkout">
+          <CartBtn>
+            {/* {cartQuantity >= 1 && <span>{cartQuantity}</span>} */}
+            <ShoppingCart size={22} weight="fill" />
+          </CartBtn>
+        </NavLink>
       </HeaderNav>
     </HeaderContainer>
   )
