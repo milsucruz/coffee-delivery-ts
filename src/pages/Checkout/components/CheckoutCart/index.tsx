@@ -1,5 +1,5 @@
 import { useCart } from '../../../../hook/useCart'
-import { formatMoney } from '../../../../utils/formatMoney'
+import { priceFormatter } from '../../../../utils/priceFormatter'
 import { CoffeeCard } from '../CoffeeCard'
 import {
   CheckoutCartContainer,
@@ -14,9 +14,6 @@ export function CheckoutCart() {
   const { cartItems, cartItemsTotal, cartQuantity } = useCart()
 
   const cartTotal = deliveryPrice + cartItemsTotal
-  const formattedItemsTotal = formatMoney(cartItemsTotal)
-  const formattedCartTotal = formatMoney(cartTotal)
-  const formattedDeliveryPrice = formatMoney(deliveryPrice)
 
   return (
     <CheckoutCartContainer>
@@ -30,17 +27,17 @@ export function CheckoutCart() {
         <FinalBill>
           <CheckoutInfos>
             <p>Total de itens</p>
-            <p>{formattedItemsTotal}</p>
+            <p>{priceFormatter.format(cartItemsTotal)}</p>
           </CheckoutInfos>
 
           <CheckoutInfos>
             <p>Entrega</p>
-            <p>R$ {formattedDeliveryPrice}</p>
+            <p>{priceFormatter.format(deliveryPrice)}</p>
           </CheckoutInfos>
 
           <CheckoutInfos>
             <span>Total</span>
-            <span>R$ {formattedCartTotal}</span>
+            <span>{priceFormatter.format(cartTotal)}</span>
           </CheckoutInfos>
 
           <button type="submit" disabled={cartQuantity <= 0}>
