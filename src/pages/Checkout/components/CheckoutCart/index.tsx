@@ -1,3 +1,4 @@
+import { useCart } from '../../../../hook/useCart'
 import { CoffeeCard } from '../CoffeeCard'
 import {
   CheckoutCartContainer,
@@ -7,13 +8,16 @@ import {
 } from './styles'
 
 export function CheckoutCart() {
+  const { cartItems } = useCart()
+
   return (
     <CheckoutCartContainer>
       <h2>Cafés selecionados</h2>
 
       <CheckoutCartContent>
-        <CoffeeCard />
-        <CoffeeCard />
+        {cartItems.map((item) => {
+          return <CoffeeCard key={item.id} coffee={item} />
+        })}
 
         <FinalBill>
           <CheckoutInfos>
