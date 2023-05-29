@@ -10,6 +10,7 @@ export const CoffeeCardContainer = styled.div`
   span {
     font-weight: 700;
     color: ${(props) => props.theme['base-text']};
+    flex: 1;
   }
 `
 
