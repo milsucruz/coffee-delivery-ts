@@ -8,12 +8,16 @@ import {
 
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { CartItem } from '../../../../context/CartContext'
+import { formatMoney } from '../../../../utils/formatMoney'
 
 interface CoffeeCartCardProps {
   coffee: CartItem
 }
 
 export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
+  const coffeeTotal = coffee.price * coffee.quantity
+  const formattedPrice = formatMoney(coffeeTotal)
+
   return (
     <CoffeeCardContainer>
       <CoffeeCardContent>
@@ -36,7 +40,7 @@ export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
           </Menu>
         </Infos>
       </CoffeeCardContent>
-      <span>R$ 9,90</span>
+      <span>R$ {formattedPrice}</span>
     </CoffeeCardContainer>
   )
 }
