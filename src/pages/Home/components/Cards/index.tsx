@@ -8,6 +8,9 @@ import {
   CardShopping,
 } from './styles'
 
+import { useCart } from '../../../../hook/useCart'
+import { useState } from 'react'
+
 export interface Coffee {
   id: number
   tags: string[]
@@ -22,6 +25,25 @@ interface CoffeeProps {
 }
 
 export function Card({ coffee }: CoffeeProps) {
+  const [quantity, setQuantity] = useState(1)
+  const { addCoffeeToCart } = useCart()
+
+  function handleAddToCart() {
+    const coffeeToAdd = {
+      ...coffee,
+      quantity,
+    }
+    addCoffeeToCart(coffeeToAdd)
+  }
+
+  function handleAddQuantity() {
+    setQuantity((state) => state + 1)
+  }
+
+  function handleRemoveQuantity() {
+    setQuantity((state) => state - 1)
+  }
+
   return (
     <CardContainer>
       <img src={`/coffees/${coffee.photo}`} alt="" />
@@ -42,15 +64,15 @@ export function Card({ coffee }: CoffeeProps) {
         </p>
         <CardMenu>
           <CardQuantity>
-            <button>
+            <button disabled={quantity <= 1} onClick={handleRemoveQuantity}>
               <Minus />
             </button>
-            <p>01</p>
-            <button>
+            <p>{quantity}</p>
+            <button onClick={handleAddQuantity}>
               <Plus />
             </button>
           </CardQuantity>
-          <button>
+          <button onClick={handleAddToCart}>
             <ShoppingCart size={22} weight="fill" />
           </button>
         </CardMenu>
