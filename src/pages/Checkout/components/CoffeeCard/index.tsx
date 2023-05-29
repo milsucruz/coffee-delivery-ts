@@ -9,14 +9,25 @@ import {
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { CartItem } from '../../../../context/CartContext'
 import { formatMoney } from '../../../../utils/formatMoney'
+import { useCart } from '../../../../hook/useCart'
 
 interface CoffeeCartCardProps {
   coffee: CartItem
 }
 
 export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
+  const { changeCartItemQuantity } = useCart()
+
   const coffeeTotal = coffee.price * coffee.quantity
   const formattedPrice = formatMoney(coffeeTotal)
+
+  function handleIncrease() {
+    changeCartItemQuantity(coffee.id, 'increase')
+  }
+
+  function handleDecrease() {
+    changeCartItemQuantity(coffee.id, 'decrease')
+  }
 
   return (
     <CoffeeCardContainer>
@@ -26,11 +37,11 @@ export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
           <p>{coffee.name}</p>
           <Menu>
             <CoffeeQuantityMenu>
-              <button>
+              <button disabled={coffee.quantity <= 0} onClick={handleDecrease}>
                 <Minus />
               </button>
               <p>{coffee.quantity}</p>
-              <button>
+              <button onClick={handleIncrease}>
                 <Plus />
               </button>
             </CoffeeQuantityMenu>
