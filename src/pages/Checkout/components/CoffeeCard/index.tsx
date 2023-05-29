@@ -16,7 +16,7 @@ interface CoffeeCartCardProps {
 }
 
 export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
-  const { changeCartItemQuantity } = useCart()
+  const { changeCartItemQuantity, removeCartItem } = useCart()
 
   const coffeeTotal = coffee.price * coffee.quantity
   const formattedPrice = formatMoney(coffeeTotal)
@@ -27,6 +27,10 @@ export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
 
   function handleDecrease() {
     changeCartItemQuantity(coffee.id, 'decrease')
+  }
+
+  function handleRemoveItem() {
+    removeCartItem(coffee.id)
   }
 
   return (
@@ -45,7 +49,7 @@ export function CoffeeCard({ coffee }: CoffeeCartCardProps) {
                 <Plus />
               </button>
             </CoffeeQuantityMenu>
-            <button>
+            <button onClick={handleRemoveItem}>
               <Trash size={16} /> Remover
             </button>
           </Menu>
