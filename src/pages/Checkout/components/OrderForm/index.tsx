@@ -7,6 +7,7 @@ import {
   AddressFormTitle,
   PaymentTitle,
 } from './styles'
+import { PaymentMethod } from '../Payment'
 
 export function OrderForm() {
   return (
@@ -35,7 +36,7 @@ export function OrderForm() {
           </p>
         </PaymentTitle>
 
-        <h1>Payment</h1>
+        <PaymentMethod />
       </PaymentMethodContainer>
     </OrderFormContainer>
   )
