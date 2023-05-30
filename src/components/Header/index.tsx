@@ -19,7 +19,7 @@ export function Header() {
         </LocationBtn>
 
         <NavLink to="/checkout">
-          <CartBtn>
+          <CartBtn disabled={cartQuantity <= 0}>
             {cartQuantity >= 1 && <span>{cartQuantity}</span>}
             <ShoppingCart size={22} weight="fill" />
           </CartBtn>

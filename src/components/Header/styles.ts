@@ -87,4 +87,9 @@ export const CartBtn = styled.button`
     background-color: ${(props) => props.theme['yellow-dark']};
     color: ${(props) => props.theme['yellow-light']};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 `
