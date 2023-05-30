@@ -8,7 +8,7 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 const checkoutPageFormSchema = zod.object({
-  cep: zod.string(),
+  cep: zod.string().min(1, 'here'),
   rua: zod.string(),
   numero: zod.string(),
   complemento: zod.string(),

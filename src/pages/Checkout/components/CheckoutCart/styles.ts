@@ -42,6 +42,11 @@ export const FinalBill = styled.div`
   button:hover {
     background: ${(props) => props.theme['yellow-dark']};
   }
+
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
 `
 
 export const CheckoutInfos = styled.div`
