@@ -21,7 +21,6 @@ import {
 
 export function OrderForm() {
   const { register, control } = useFormContext()
-
   return (
     <OrderFormContainer>
       <h2>Complete seu pedido</h2>
@@ -34,7 +33,9 @@ export function OrderForm() {
           </p>
         </AddressFormTitle>
 
-        <Input placeholder="CEP" {...register('cep')} />
+        <InputStyle>
+          <Input placeholder="CEP" {...register('cep')} />
+        </InputStyle>
 
         <Input placeholder="Rua" {...register('rua')} />
 
