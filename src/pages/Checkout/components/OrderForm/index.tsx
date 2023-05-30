@@ -1,19 +1,31 @@
-import { CurrencyDollar, MapPinLine } from 'phosphor-react'
-import { AddressForm } from '../AddressForm'
+import { Controller, useFormContext } from 'react-hook-form'
 import {
+  InputWrapper,
+  Input,
+  InputStyle,
   OrderFormContainer,
-  AddressFormContainer,
   PaymentMethodContainer,
-  AddressFormTitle,
+  PaymentButtonsWrapper,
+  PaymentOption,
   PaymentTitle,
+  AddressFormTitle,
 } from './styles'
-import { PaymentMethod } from '../Payment'
+
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from 'phosphor-react'
 
 export function OrderForm() {
+  const { register, control } = useFormContext()
+
   return (
     <OrderFormContainer>
       <h2>Complete seu pedido</h2>
-      <AddressFormContainer>
+      <InputWrapper>
         <AddressFormTitle>
           <MapPinLine size={22} />
           <p>
@@ -22,8 +34,27 @@ export function OrderForm() {
           </p>
         </AddressFormTitle>
 
-        <AddressForm />
-      </AddressFormContainer>
+        <Input placeholder="CEP" {...register('cep')} />
+
+        <Input placeholder="Rua" {...register('rua')} />
+
+        <InputStyle>
+          <div>
+            <Input placeholder="Número" {...register('numero')} />
+            <Input
+              type="text"
+              placeholder="Complemento"
+              {...register('complemento')}
+            />
+          </div>
+
+          <div>
+            <Input type="text" placeholder="Bairro" {...register('bairro')} />
+            <Input type="text" placeholder="Cidade" {...register('cidade')} />
+            <Input type="text" placeholder="UF" {...register('uf')} />
+          </div>
+        </InputStyle>
+      </InputWrapper>
 
       <PaymentMethodContainer>
         <PaymentTitle>
@@ -36,7 +67,33 @@ export function OrderForm() {
           </p>
         </PaymentTitle>
 
-        <PaymentMethod />
+        <Controller
+          control={control}
+          name="payment"
+          render={({ field }) => {
+            return (
+              <PaymentButtonsWrapper
+                onValueChange={field.onChange}
+                value={field.value}
+              >
+                <PaymentOption value="credit">
+                  <CreditCard size={16} />
+                  Cartão de crédito
+                </PaymentOption>
+
+                <PaymentOption value="debit">
+                  <Bank size={16} />
+                  Cartão de débito
+                </PaymentOption>
+
+                <PaymentOption value="money">
+                  <Money size={16} />
+                  Dinheiro
+                </PaymentOption>
+              </PaymentButtonsWrapper>
+            )
+          }}
+        />
       </PaymentMethodContainer>
     </OrderFormContainer>
   )
