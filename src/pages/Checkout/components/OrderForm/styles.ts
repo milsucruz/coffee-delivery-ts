@@ -62,7 +62,6 @@ export const Input = styled.input`
 
   &:nth-child(1) {
     max-width: 12rem;
-    border: 1px solid red;
   }
 `
 
