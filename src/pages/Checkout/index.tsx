@@ -6,6 +6,7 @@ import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
+import { useCart } from '../../hook/useCart'
 
 const checkoutPageFormSchema = zod.object({
   cep: zod.string().min(1, 'Informe um cep válido'),
@@ -30,11 +31,13 @@ export function Checkout() {
   const { handleSubmit } = checkoutPageForm
 
   const nav = useNavigate()
+  const { cleanCart } = useCart()
 
   function handleConfirmOrder(data: CheckoutPageFormData) {
     nav('/success', {
       state: data,
     })
+    cleanCart()
   }
 
   return (
