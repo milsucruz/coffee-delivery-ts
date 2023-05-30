@@ -15,7 +15,7 @@ const checkoutPageFormSchema = zod.object({
   bairro: zod.string(),
   cidade: zod.string(),
   uf: zod.string(),
-  payment: zod.enum(['Cartão de credito', 'Cartão de débito', 'Dinheiro']),
+  payment: zod.enum(['Cartão de crédito', 'Cartão de débito', 'Dinheiro']),
 })
 
 export type OrderData = zod.infer<typeof checkoutPageFormSchema>

@@ -76,17 +76,17 @@ export function OrderForm() {
                 onValueChange={field.onChange}
                 value={field.value}
               >
-                <PaymentOption value="credit">
+                <PaymentOption value="Cartão de crédito">
                   <CreditCard size={16} />
                   Cartão de crédito
                 </PaymentOption>
 
-                <PaymentOption value="debit">
+                <PaymentOption value="Cartão de débito">
                   <Bank size={16} />
                   Cartão de débito
                 </PaymentOption>
 
-                <PaymentOption value="money">
+                <PaymentOption value="Dinheiro">
                   <Money size={16} />
                   Dinheiro
                 </PaymentOption>
