@@ -5,6 +5,7 @@ import { CheckoutContainer } from './styles'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, FormProvider } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 
 const checkoutPageFormSchema = zod.object({
   cep: zod.string(),
@@ -14,7 +15,7 @@ const checkoutPageFormSchema = zod.object({
   bairro: zod.string(),
   cidade: zod.string(),
   uf: zod.string(),
-  payment: zod.enum(['credit', 'debit', 'money']),
+  payment: zod.enum(['Cartão de credito', 'Cartão de débito', 'Dinheiro']),
 })
 
 export type OrderData = zod.infer<typeof checkoutPageFormSchema>
@@ -28,8 +29,12 @@ export function Checkout() {
 
   const { handleSubmit } = checkoutPageForm
 
+  const nav = useNavigate()
+
   function handleConfirmOrder(data: CheckoutPageFormData) {
-    console.log(data)
+    nav('/success', {
+      state: data,
+    })
   }
 
   return (

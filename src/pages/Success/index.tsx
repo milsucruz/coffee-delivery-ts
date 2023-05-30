@@ -8,8 +8,27 @@ import {
 import { MapPin, Timer, CurrencyDollar } from 'phosphor-react'
 
 import SuccessImg from '../../assets/Illustration.png'
+import { OrderData } from '../Checkout'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+
+interface OrderInfos {
+  state: OrderData
+}
 
 export function Success() {
+  const { state } = useLocation() as unknown as OrderInfos
+
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      nav('/')
+    }
+  })
+
+  if (!state) return <></>
+
   return (
     <SuccessContainer>
       <TextWrapper>
@@ -24,8 +43,12 @@ export function Success() {
               <MapPin />
             </button>
             <section>
-              <p>Entrega em Rua João Daniel Martinelli, 102</p>
-              <span>Farrapos - Porto Alegre, RS</span>
+              <p>
+                Entrega em {state.rua}, {state.numero}
+              </p>
+              <span>
+                {state.bairro} - {state.cidade}, {state.uf}
+              </span>
             </section>
           </BannerIcons>
 
@@ -45,7 +68,7 @@ export function Success() {
             </button>
             <section>
               <p>Pagamento na entrega</p>
-              <span>Cartão de Crédito</span>
+              <span>{state.payment}</span>
             </section>
           </BannerIcons>
         </IconsWrapper>
