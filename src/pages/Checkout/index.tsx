@@ -8,13 +8,13 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 
 const checkoutPageFormSchema = zod.object({
-  cep: zod.string().min(1, 'here'),
-  rua: zod.string(),
-  numero: zod.string(),
-  complemento: zod.string(),
-  bairro: zod.string(),
-  cidade: zod.string(),
-  uf: zod.string(),
+  cep: zod.string().min(1, 'Informe um cep válido'),
+  rua: zod.string().min(1, 'Informe a rua'),
+  numero: zod.string().min(1, 'Informe o número da residência'),
+  complemento: zod.string().optional(),
+  bairro: zod.string().min(1, 'Informe o bairro'),
+  cidade: zod.string().min(1, 'Informe a cidade'),
+  uf: zod.string().min(1, 'Informe a Unidade Federativa'),
   payment: zod.enum(['Cartão de crédito', 'Cartão de débito', 'Dinheiro']),
 })
 
